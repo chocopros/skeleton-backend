@@ -29,3 +29,14 @@ npm i express uuid dotenv sequelize pg pg-hstore
 npm i -D nodemon
 - -D nodemon -> para generar un servidor repetitivo.
 
+# Orden
+
+1. app.js
+2. .env
+3. config.js
+4. database.js
+5. models
+6. controladores
+7. services
+8. routes
+

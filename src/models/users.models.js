@@ -28,7 +28,10 @@ const Users = db.define('products', {
     email: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isEmail
+        }
     },
     password: {
         type: DataTypes.STRING,
@@ -36,7 +39,8 @@ const Users = db.define('products', {
     },
     phone: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     birthday: {
         type: DataTypes.DATEONLY,
@@ -60,10 +64,8 @@ const Users = db.define('products', {
         field: 'is_validated',
         type: DataTypes.BOOLEAN,
         defaultValue: true,
-        allowNull: false
-        
+        allowNull: false   
     }
-
-})
+});
 
 module.exports = Users
