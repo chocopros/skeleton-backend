@@ -20,12 +20,12 @@
 # npm
 
 npm i express uuid dotenv sequelize pg pg-hstore
-    -express -> para que funcione la aplicacion.
-    -uuid -> generador de codigos UUID.
-    - dotenv -> habilitar variables de entorno.
-    - sequelize -> crear modelos y tablas.
-    - pg pg-hstore -> depedencia que necesita sequelize para integrar postgres
+- express -> para que funcione la aplicacion.
+- uuid -> generador de codigos UUID.
+- dotenv -> habilitar variables de entorno.
+- sequelize -> crear modelos y tablas.
+- pg pg-hstore -> depedencia que necesita sequelize para integrar postgres
 
 npm i -D nodemon
-    - -D nodemon -> para generar un servidor repetitivo.
+- -D nodemon -> para generar un servidor repetitivo.
 
