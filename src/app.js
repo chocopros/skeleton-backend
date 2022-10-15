@@ -6,7 +6,8 @@ const app = express()
 app.use(express.json())
 //? FILES
 const {port} = require('./config')
-
+//? IMPORT Routes
+const userRouter = require('./users/users.routers')
 
 
 app.get('/', ( req, res ) => {
@@ -16,6 +17,7 @@ app.get('/', ( req, res ) => {
     })
 })
 
+app.use('/api/v1/users', userRouter)
 
 
 app.listen(port, () => {

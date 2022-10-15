@@ -1,0 +1,31 @@
+const route = require('express').Router()
+
+const userServices = require('./users.services')
+
+
+
+// Ruta raiz
+route.get('/', userServices.getAllUsers)
+
+//TODO el registerUser ira en la ruta /auth/register
+
+
+
+
+// rutas dinamicas por ID /users/:id
+//FORMA PASADA
+// router.get('/:id')
+// router.path('/:id')
+// router.put('/:id')
+// router.delete('/:id') --------> FORMA PASADA
+
+ 
+//? Rutas Dinamicas por ID
+route.route('/:id')
+    .get(userServices.getUserById)
+    .patch(userServices.patchUser)
+    .delete(userServices.deleteUser)
+
+
+    
+module.exports = route

@@ -30,6 +30,8 @@ npm i express uuid dotenv sequelize pg pg-hstore bcrypt
 npm i -D nodemon
 - -D nodemon -> para generar un servidor repetitivo.
 
+npm i passport passport-jwt jsonwebtoken
+
 # Orden
 
 1. app.js
