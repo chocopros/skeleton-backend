@@ -57,6 +57,7 @@ const createUser = async data => {
         birthday: data.birthday,
         country: data.country
     });
+    console.log('NEW USER CREATE NOW!!!')
     return newUser
 };
 
