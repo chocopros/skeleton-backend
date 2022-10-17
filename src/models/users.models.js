@@ -4,7 +4,7 @@ const {DataTypes} = require ('sequelize')
 
 const db = require('../utils/database')
 
-const Users = db.define('products', {
+const Users = db.define('users', {
     
     id: {
         primaryKey: true,
@@ -30,7 +30,7 @@ const Users = db.define('products', {
         unique: true,
         allowNull: false,
         validate: {
-            isEmail
+            isEmail: true
         }
     },
     password: {
