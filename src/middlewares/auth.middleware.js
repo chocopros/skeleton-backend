@@ -13,7 +13,8 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;  // Extrae los header de 
 // Exportando funcioon anonima
 module.exports = (passport) => {
     const options = {
-        
+        jwtFromRequest : ExtractJwt.fromAuthHeaderWithScheme('jwt'),
+        secretOrkey: 'academlo'
     }
 }
 
