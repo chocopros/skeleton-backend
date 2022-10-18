@@ -7,16 +7,35 @@
 
 // estrategias diferentes de hacer un login (con facebook, Google, JWT, Github)
 
-const JwtStrategy = require('passport').Strategy;  // Passport maneja estrategias para las diferentes tipos de Autentificaciones
-const ExtractJwt = require('passport-jwt').ExtractJwt;  // Extrae los header de la peticion
+const JwtStrategy = require('passport-jwt').Strategy;  // Passport maneja estrategias para las diferentes tipos de Autentificaciones
+const ExtractJwt = require('passport-jwt').ExtractJwt;   // Extrae los header de la peticion
+
+const { jwtSecret } = require('../config'); //importando la clave secreta
+const { getUserById } = require('../users/users.controllers');
 
 // Exportando funcioon anonima
 module.exports = (passport) => {
     const options = {
         jwtFromRequest : ExtractJwt.fromAuthHeaderWithScheme('jwt'),
-        secretOrkey: 'academlo'
+        secretOrKey: jwtSecret
     }
+    passport.use(
+        new JwtStrategy(options, async(decoded, done) => {
+            //? done(error, decoded)
+            try {
+                const response = await getUserById(decoded.id)
+                if(!response){
+                    return done(null, false)
+                }
+                console.log('decoded JWT', decoded)
+                return done(null, decoded)
+            } catch (error) {
+                return done(error, false)
+            }
+        })
+    )
 }
+
 
 
 

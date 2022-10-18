@@ -1,11 +1,11 @@
 const route = require('express').Router()
-
+const passport = require('passport') //proteger Rutas
 const userServices = require('./users.services')
 
-
+require('../middlewares/auth.middleware')(passport) // para proteger rutas
 
 // Ruta raiz
-route.get('/', userServices.getAllUsers)
+route.get('/' , passport.authenticate('jwt', {session: false}) , userServices.getAllUsers)
 
 //TODO el registerUser ira en la ruta /auth/register
 
