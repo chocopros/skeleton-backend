@@ -1,15 +1,34 @@
-const route = require('express').Router()
+const router = require('express').Router()
 const passport = require('passport') //proteger Rutas
 const userServices = require('./users.services')
 
 require('../middlewares/auth.middleware')(passport) // para proteger rutas
 
 // Ruta raiz
-route.get('/' , passport.authenticate('jwt', {session: false}) , userServices.getAllUsers)
+router.get('/', passport.authenticate('jwt', {session: false}) , userServices.getAllUsers)
 
 //TODO el registerUser ira en la ruta /auth/register
 
 
+
+
+//? Ruta de infomacion propia del usuario logueado
+router.route('/me')
+    .get(passport.authenticate('jwt', {session:false}), userServices.getMyUser)
+    //.patch(userServices.patchUser)
+    //.delete(userServices.deleteUser)
+
+
+//? /api/v1/users/:id
+//? Rutas Dinamicas por ID
+router.route('/:id')
+    .get(userServices.getUserById)
+    .patch(userServices.patchUser)
+    .delete(userServices.deleteUser)
+
+
+    
+module.exports = router
 
 
 // rutas dinamicas por ID /users/:id
@@ -18,14 +37,3 @@ route.get('/' , passport.authenticate('jwt', {session: false}) , userServices.ge
 // router.path('/:id')
 // router.put('/:id')
 // router.delete('/:id') --------> FORMA PASADA
-
- 
-//? Rutas Dinamicas por ID
-route.route('/:id')
-    .get(userServices.getUserById)
-    .patch(userServices.patchUser)
-    .delete(userServices.deleteUser)
-
-
-    
-module.exports = route
