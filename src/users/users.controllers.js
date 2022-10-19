@@ -5,7 +5,11 @@ const { hashPassword } = require('../utils/crypto');
 
 // GET ALL USER
 const getAllUsers = async () => {
-    const data = await Users.findAll()
+    const data = await Users.findAll({
+        where: {
+            status: 'active'
+        }
+    })
     return data
 };
 //TEST GET ALL USER
@@ -31,7 +35,8 @@ const getCountUsers = async () => {
 const getUserById = async (id) => {
     const data = await Users.findOne({
         where: {
-            id: id
+            id: id,
+            status: 'active'
         }
     });
     return data
@@ -100,7 +105,8 @@ const getUserByEmail = async (email) => {
     //? SELECT * FROM users where email = 'jesus@gmail.com'
     const data = await Users.findOne({
         where: {
-            email: email
+            email: email,
+            status: 'active'
         }
     });
     return data

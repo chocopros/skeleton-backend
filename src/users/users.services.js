@@ -114,11 +114,39 @@ const getMyUser = ( req, res ) => {
 
 
 
+// TODO crear ruras protegidas /me, con los verbos para udate y detele
+
+const patchMyUser = ( req, res) => {
+
+    const id = req.user.id
+    const {firstName, lastName, phone, gender, birthday, country } = req.body
+
+    usersControllers.updateUser( id, {firstName, lastName, phone, gender, birthday, country } )
+        .then(data => {res.status(200).json({message: 'Your User was edited sucesfully!!!'})})
+        .catch( err => res.status(400).json({message: err.message}))
+}
+
+//? 2 tios de detele:
+//* 1. por Administrador
+//* 2. por mi mismo
+
+const deleteMyUser = ( req, res ) => {
+    const id = req.user.id
+
+    usersControllers.updateUser(id, {status: 'inactive'})
+        .then(data => {res.status(200).json({message: 'Your User was deleted sucesfully!!!'})})
+        .catch( err => res.status(400).json({message: err.message}))
+}
+
+
+
 module.exports = {
     getAllUsers,
     getUserById,
     registerUser,
     patchUser,
     deleteUser,
-    getMyUser
+    getMyUser,
+    patchMyUser,
+    deleteMyUser
 }
