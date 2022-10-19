@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const passport = require('passport') //proteger Rutas
 const userServices = require('./users.services')
+const adminValidate = require('../middlewares/role.middleware')
 
 require('../middlewares/auth.middleware')(passport) // para proteger rutas
 
@@ -25,9 +26,11 @@ router.route('/:id')
     .get(userServices.getUserById)
     .patch(
         passport.authenticate('jwt', {session:false}),
+        adminValidate,
         userServices.patchUser)
     .delete(
         passport.authenticate('jwt', {session:false}),
+        adminValidate,
         userServices.deleteUser)
 
 

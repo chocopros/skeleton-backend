@@ -11,6 +11,7 @@ const Users = require('./models/users.models')
 //? IMPORT Routes
 const userRouter = require('./users/users.routers')
 const authRouter = require('./auth/auth.router')
+const initModels = require('./models/initModels')
 
 
 //DATABASE AUTH AND SYNC
@@ -30,6 +31,8 @@ app.get('/',( req, res ) => {
         users: `localhost:${port}/api/v1/users`
     })
 })
+
+initModels()
 
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/auth', authRouter)
